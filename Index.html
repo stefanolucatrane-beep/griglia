@@ -1,0 +1,807 @@
+
+Cerca nelle chat
+Raccolta
+Progetto Bullismo: Umano Troppo Poco
+Scaletta Progettazione Didattica Concorsi Docenti
+<!DOCTYPE html> <html lang="it"> <head>     <meta charset="UTF-8">     <meta name="viewport" content="width=device-width, initial-scale=1.0">     <title>Leaderboard: Cyberbullismo e Bullismo</title>     <!-- Google Fonts ad alto impatto grafico -->     <link rel="preconnect" href="https://fonts.googleapis.com">     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">          <style>         :root {             --bg-game: #f0f4f8;             --primary-purple: #864af9;             --neon-pink: #ff2e93;             --neon-cyan: #00f0ff;             --gold: #ffc837;             --silver: #bdc3c7;             --bronze: #d35400;             --text-dark: #111111;             --border-thick: 4px solid #111111;         }         * {             box-sizing: border-box;             margin: 0;             padding: 0;         }         body {             background-color: #6c5ce7;             /* Sfondo dinamico a cerchi concentrici pop */             background-image: radial-gradient(#864af9 20%, transparent 20%), radial-gradient(#864af9 20%, transparent 20%);             background-size: 30px 30px;             background-position: 0 0, 15px 15px;             font-family: 'Plus Jakarta Sans', sans-serif;             color: var(--text-dark);             padding: 40px 20px;             display: flex;             justify-content: center;         }         .container {             background: #ffffff;             max-width: 850px;             width: 100%;             border: var(--border-thick);             border-radius: 24px;             padding: 35px;             box-shadow: 12px 12px 0px #111111;         }         /* --- HEADER DELLA RELAZIONE --- */         header {             text-align: center;             margin-bottom: 40px;             background: #ff7675;             border: var(--border-thick);             border-radius: 16px;             padding: 25px;             box-shadow: 6px 6px 0px #111111;             position: relative;         }         .badge-status {             position: absolute;             top: -15px;             right: 20px;             background: #55efc4;             padding: 5px 15px;             font-family: 'Bungee', sans-serif;             font-size: 0.8rem;             border: 2px solid #111111;             box-shadow: 3px 3px 0px #111111;             transform: rotate(2deg);         }         h1 {             font-family: 'Bungee', sans-serif;             font-size: 2.2rem;             line-height: 1.2;             color: #ffffff;             -webkit-text-stroke: 1.5px #111111;             text-shadow: 4px 4px 0px var(--primary-purple);             margin-bottom: 15px;         }         .meta-info {             display: flex;             justify-content: center;             gap: 15px;             flex-wrap: wrap;             font-weight: 800;             font-size: 0.95rem;             background: rgba(255, 255, 255, 0.9);             padding: 8px 15px;             border: 2px solid #111111;             border-radius: 8px;         }         /* --- IL PODIO (TOP 3) --- */         .podium-section {             display: grid;             grid-template-columns: 1fr 1.2fr 1fr;             gap: 15px;             align-items: end;             margin-bottom: 40px;             padding: 10px;         }         .podium-card {             border: var(--border-thick);             border-radius: 16px;             padding: 20px 10px;             text-align: center;             box-shadow: 5px 5px 0px #111111;             position: relative;             background: #ffffff;         }         .p-1 { background-color: #ffeaa7; order: 2; transform: scale(1.05); z-index: 2; } /* Oro */         .p-2 { background-color: #dfe6e9; order: 1; } /* Argento */         .p-3 { background-color: #fab1a0; order: 3; } /* Bronzo */         .medal-icon {             font-family: 'Bungee', sans-serif;             font-size: 1.8rem;             width: 50px;             height: 50px;             background: #ffffff;             border: 3px solid #111111;             border-radius: 50%;             display: flex;             align-items: center;             justify-content: center;             margin: -40px auto 10px auto;             box-shadow: 3px 3px 0px #111111;         }         .p-1 .medal-icon { background: var(--gold); }         .p-2 .medal-icon { background: var(--silver); }         .p-3 .medal-icon { background: var(--bronze); }         .podium-name {             font-family: 'Bungee', sans-serif;             font-size: 1.3rem;             margin-bottom: 5px;             word-break: break-all;         }         .podium-score {             font-weight: 800;             background: #111111;             color: #fff;             padding: 3px 8px;             border-radius: 5px;             font-size: 0.9rem;             display: inline-block;         }         .podium-accuracy {             margin-top: 8px;             font-size: 0.85rem;             font-weight: 800;             color: #2d3436;         }         /* --- CLASSIFICA COMPLETA --- */         .leaderboard-title {             font-family: 'Bungee', sans-serif;             font-size: 1.4rem;             margin-bottom: 15px;             display: flex;             align-items: center;             gap: 10px;         }         .list-container {             display: flex;             flex-direction: column;             gap: 12px;         }         .player-row {             display: grid;             grid-template-columns: 50px 1.5fr 1.5fr 1fr;             align-items: center;             background: #ffffff;             border: 3px solid #111111;             border-radius: 12px;             padding: 12px 20px;             box-shadow: 4px 4px 0px #111111;             transition: all 0.2s ease;         }         .player-row:hover {             transform: translate(-2px, -2px);             box-shadow: 6px 6px 0px #111111;             background: #f1f2f6;         }         .rank-number {             font-family: 'Bungee', sans-serif;             font-size: 1.2rem;             color: var(--primary-purple);         }         .player-name {             font-weight: 800;             font-size: 1.1rem;         }         /* Barra della precisione risposte */         .accuracy-container {             display: flex;             align-items: center;             gap: 10px;             padding-right: 15px;         }         .progress-bar-bg {             background: #e0e0e0;             border: 2px solid #111111;             height: 14px;             width: 100%;             border-radius: 10px;             overflow: hidden;         }         .progress-bar-fill {             background: #00b894;             height: 100%;             border-right: 1px solid #111111;         }         .accuracy-text {             font-weight: 800;             font-size: 0.9rem;             min-width: 40px;         }         .player-score {             font-family: 'Bungee', sans-serif;             font-size: 1rem;             text-align: right;             color: #2d3436;         }         /* --- RESPONSIVE DESIGN --- */         @media (max-width: 650px) {             .podium-section { grid-template-columns: 1fr; gap: 40px; }             .p-1, .p-2, .p-3 { order: unset; transform: none; }             .player-row { grid-template-columns: 40px 1.2fr 1fr; padding: 10px; gap: 5px; }             .accuracy-container { display: none; } /* Nasconde le barre su mobile molto stretto per spazio */             h1 { font-size: 1.6rem; }         }     </style> </head> <body>     <div class="container">                  <!-- HEADER DATI CONFERENZA -->         <header>             <div class="badge-status">COMPLETATA 🏆</div>             <h1>Cyberbullismo e Bullismo:<br>consapevolezza e prevenzione</h1>             <div class="meta-info">                 <span>👤 Presentato da: stefanolucatrane</span>                 <span>📅 Periodo: 10 - 30 Maggio 2026</span>                 <span>❓ Domande: 19</span>             </div>         </header>         <!-- PODIO DEI PRIMI 3 CLASSIFICATI -->         <div class="leaderboard-title">🔥 Il Podio dei Vincitori</div>         <div class="podium-section">                          <!-- 1° Posto: giorgia -->             <div class="podium-card p-1">                 <div class="medal-icon">1</div>                 <div class="podium-name">giorgia</div>                 <div class="podium-score">16.375 pt</div>                 <div class="podium-accuracy">🎯 Precisione: 83%</div>             </div>             <!-- 2° Posto: Isacco -->             <div class="podium-card p-2">                 <div class="medal-icon">2</div>                 <div class="podium-name">Isacco</div>                 <div class="podium-score">15.567 pt</div>                 <div class="podium-accuracy">🎯 Precisione: 94%</div>             </div>             <!-- 3° Posto: Giulia -->             <div class="podium-card p-3">                 <div class="medal-icon">3</div>                 <div class="podium-name">Giulia</div>                 <div class="podium-score">15.472 pt</div>                 <div class="podium-accuracy">🎯 Precisione: 83%</div>             </div>         </div>         <!-- CLASSIFICA COMPLETA DAL 4° AL 18° -->         <div class="leaderboard-title">🏃 Classifica Generale (18 Partecipanti)</div>         <div class="list-container">                          <!-- Posizioni 4 - 18 generate fedelmente dall'immagine -->             <div class="player-row">                 <div class="rank-number">#4</div>                 <div class="player-name">Ilaria</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 83%;"></div></div>                     <span class="accuracy-text">83%</span>                 </div>                 <div class="player-score">15.185</div>             </div>             <div class="player-row">                 <div class="rank-number">#5</div>                 <div class="player-name">Anita</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 83%;"></div></div>                     <span class="accuracy-text">83%</span>                 </div>                 <div class="player-score">14.837</div>             </div>             <div class="player-row">                 <div class="rank-number">#6</div>                 <div class="player-name">Erika</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 78%; background-color: #ff9f43;"></div></div>                     <span class="accuracy-text">78%</span>                 </div>                 <div class="player-score">14.711</div>             </div>             <div class="player-row">                 <div class="rank-number">#7</div>                 <div class="player-name">arianna</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 78%; background-color: #ff9f43;"></div></div>                     <span class="accuracy-text">78%</span>                 </div>                 <div class="player-score">14.599</div>             </div>             <div class="player-row">                 <div class="rank-number">#8</div>                 <div class="player-name">camilla</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 83%;"></div></div>                     <span class="accuracy-text">83%</span>                 </div>                 <div class="player-score">14.419</div>             </div>             <div class="player-row">                 <div class="rank-number">#9</div>                 <div class="player-name">Jenny</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 83%;"></div></div>                     <span class="accuracy-text">83%</span>                 </div>                 <div class="player-score">14.179</div>             </div>             <div class="player-row">                 <div class="rank-number">#10</div>                 <div class="player-name">Eva</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 72%; background-color: #ff9f43;"></div></div>                     <span class="accuracy-text">72%</span>                 </div>                 <div class="player-score">14.130</div>             </div>             <div class="player-row">                 <div class="rank-number">#11</div>                 <div class="player-name">Emma</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 78%; background-color: #ff9f43;"></div></div>                     <span class="accuracy-text">78%</span>                 </div>                 <div class="player-score">14.073</div>             </div>             <div class="player-row">                 <div class="rank-number">#12</div>                 <div class="player-name">Angela</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 67%; background-color: #ee5253;"></div></div>                     <span class="accuracy-text">67%</span>                 </div>                 <div class="player-score">13.997</div>             </div>             <div class="player-row">                 <div class="rank-number">#13</div>                 <div class="player-name">Angelica</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 78%; background-color: #ff9f43;"></div></div>                     <span class="accuracy-text">78%</span>                 </div>                 <div class="player-score">13.805</div>             </div>             <div class="player-row">                 <div class="rank-number">#14</div>                 <div class="player-name">noemi</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 67%; background-color: #ee5253;"></div></div>                     <span class="accuracy-text">67%</span>                 </div>                 <div class="player-score">13.477</div>             </div>             <div class="player-row">                 <div class="rank-number">#15</div>                 <div class="player-name">Agnese</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 72%; background-color: #ff9f43;"></div></div>                     <span class="accuracy-text">72%</span>                 </div>                 <div class="player-score">13.268</div>             </div>             <div class="player-row">                 <div class="rank-number">#16</div>                 <div class="player-name">Christian</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 72%; background-color: #ff9f43;"></div></div>                     <span class="accuracy-text">72%</span>                 </div>                 <div class="player-score">12.938</div>             </div>             <div class="player-row">                 <div class="rank-number">#17</div>                 <div class="player-name">elisa</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 67%; background-color: #ee5253;"></div></div>                     <span class="accuracy-text">67%</span>                 </div>                 <div class="player-score">12.451</div>             </div>             <div class="player-row">                 <div class="rank-number">#18</div>                 <div class="player-name">Irene</div>                 <div class="accuracy-container">                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 61%; background-color: #ee5253;"></div></div>                     <span class="accuracy-text">61%</span>                 </div>                 <div class="player-score">11.570</div>             </div>         </div>     </div> crea immagine in verticale di questo sopra
+Analisi del rapporto tra Agamennone e Achille: un'amicizia spezzata dall'appartenenza a fazioni diverse e da conflitti di potere. Questo scontro classico è stato interpretato come metafora delle dinamiche giovanili moderne, in cui l'appartenenza a un gruppo "in" esclude, isola o discrimina chi ne è fuori. crea immagine in relazione a quanto sopra adattandola al periodo storico della guerra di troia
+Analisi del rapporto tra Agamennone e Achille: un'amicizia spezzata dall'appartenenza a fazioni diverse e da conflitti di potere. Questo scontro classico è stato interpretato come metafora delle dinamiche giovanili moderne, in cui l'appartenenza a un gruppo "in" esclude, isola o discrimina chi ne è fuori. crea immagine in relazione a quanto sopra
+<!DOCTYPE html> <html lang="it"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Fumetto Socratico — Solitudine e Dignità</title> <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet"> <style>   :root {     --bg-color: #f4f1ea;     --paper-color: #ffffff;     --ink-color: #1a1a1a;     --socrate-color: #e0e7ff;     --allievo-triste: #fee2e2;     --allievo-ok: #d1fae5;     --accent: #e63946;     --border-stroke: 3px solid #1a1a1a;   }   * { margin: 0; padding: 0; box-sizing: border-box; }   body {     background: var(--bg-color);     font-family: 'Comic Neue', cursive;     color: var(--ink-color);     padding: 20px;     line-height: 1.2;   }   /* --- ANIMAZIONI --- */   @keyframes popIn {     0% { transform: scale(0); opacity: 0; }     80% { transform: scale(1.05); }     100% { transform: scale(1); opacity: 1; }   }   @keyframes slideIn {     from { opacity: 0; transform: translateY(20px); }     to { opacity: 1; transform: translateY(0); }   }   @keyframes float {     0%, 100% { transform: translateY(0); }     50% { transform: translateY(-8px); }   }   /* --- HEADER STILE COPERTINA --- */   header {     background: #26215c;     border: var(--border-stroke);     padding: 2.5rem;     text-align: center;     max-width: 900px;     margin: 0 auto 3rem;     box-shadow: 12px 12px 0px #000;     transform: rotate(-1deg);     color: white;     animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);   }   header h1 {     font-family: 'Bangers', cursive;     font-size: clamp(2.5rem, 6vw, 4rem);     letter-spacing: 3px;     color: #ffde59;     text-shadow: 4px 4px 0px #000;     margin-bottom: 0.5rem;   }   header p {     font-family: 'Permanent Marker', cursive;     font-size: 1.2rem;     opacity: 0.9;   }   /* --- GRIGLIA FUMETTO --- */   .comic-container {     display: grid;     grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));     gap: 35px;     max-width: 1100px;     margin: 0 auto;   }   /* --- VIGNETTA --- */   .panel {     background: var(--paper-color);     border: var(--border-stroke);     padding: 25px;     position: relative;     display: flex;     flex-direction: column;     min-height: 400px;     box-shadow: 8px 8px 0px #000;     overflow: hidden;     transition: all 0.3s ease;   }   .panel:hover {     transform: scale(1.02) rotate(0.5deg);     box-shadow: 15px 15px 0px #000;   }   /* Texture a puntini vintage */   .panel::before {     content: "";     position: absolute;     top: 0; left: 0; width: 100%; height: 100%;     background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);     background-size: 5px 5px;     pointer-events: none;   }   .panel-number {     position: absolute;     top: 0; left: 0;     background: #000;     color: #fff;     font-family: 'Bangers', cursive;     padding: 5px 15px;     font-size: 1.3rem;     z-index: 5;   }   .panel-title {     font-family: 'Permanent Marker', cursive;     background: #ffde59;     border: 2px solid #000;     padding: 4px 10px;     align-self: center;     margin-bottom: 20px;     transform: rotate(-2deg);     z-index: 2;   }   /* --- DIALOGHI --- */   .row {     display: flex;     margin-bottom: 15px;     align-items: flex-end;     opacity: 0;     animation: slideIn 0.5s forwards;     z-index: 2;   }   .row.reverse { flex-direction: row-reverse; }   /* Ritardi animazione per vignetta */   .panel .row:nth-child(2) { animation-delay: 0.3s; }   .panel .row:nth-child(3) { animation-delay: 1s; }   .panel .row:nth-child(4) { animation-delay: 1.7s; }   .avatar-box {     width: 65px;     text-align: center;     flex-shrink: 0;     animation: float 4s ease-in-out infinite;   }   .avatar-emoji {     font-size: 3rem;     display: block;     filter: drop-shadow(3px 3px 0px #000);   }   .avatar-name {     font-size: 0.7rem;     font-weight: 900;     text-transform: uppercase;     margin-top: 5px;   }   /* BALLOON --- */   .bubble {     background: white;     border: 3px solid #000;     border-radius: 20px;     padding: 12px 18px;     margin: 0 12px 15px;     position: relative;     font-weight: 700;     font-size: 0.95rem;     max-width: 75%;     box-shadow: 4px 4px 0px rgba(0,0,0,0.1);   }   .bubble.soc { background: var(--socrate-color); }   .bubble.all-sad { background: var(--allievo-triste); }   .bubble.all-ok { background: var(--allievo-ok); }   /* Coda del fumetto */   .bubble::after {     content: '';     position: absolute;     bottom: -13px;     border-width: 13px 13px 0;     border-style: solid;     border-color: #000 transparent;   }   .row:not(.reverse) .bubble::after { left: 20px; transform: rotate(10deg); }   .row.reverse .bubble::after { right: 20px; transform: rotate(-10deg); }   /* DIDASCALIE --- */   .caption {     background: #1a1a1a;     color: #fff;     padding: 10px;     font-family: 'Comic Neue', cursive;     font-style: italic;     font-size: 0.85rem;     margin-top: auto;     border: 2px solid #ffde59;     z-index: 2;   }   .shock-box {     background: #ffde59;     border: 3px solid #000;     padding: 15px;     text-align: center;     font-family: 'Bangers', cursive;     font-size: 1.4rem;     color: #e63946;     margin: 10px 0;     transform: scale(1.1) rotate(2deg);     animation: popIn 0.5s forwards 2.2s;     opacity: 0;   }   /* CONCLUSIONE --- */   .the-end {     grid-column: 1 / -1;     background: #e63946;     color: white;     border: var(--border-stroke);     padding: 4rem 2rem;     text-align: center;     box-shadow: 15px 15px 0px #000;     margin-top: 2rem;     transform: rotate(0.5deg);   }   .the-end blockquote {     font-family: 'Bangers', cursive;     font-size: clamp(2rem, 5vw, 3.5rem);     line-height: 1;     text-shadow: 3px 3px 0px #000;     margin-bottom: 1.5rem;   }   footer {     text-align: center;     padding: 3rem;     font-family: 'Permanent Marker', cursive;     color: #666;   }   @media (max-width: 600px) {     .comic-container { grid-template-columns: 1fr; }     header h1 { font-size: 2.2rem; }   } </style> </head> <body> <header>   <h1>SOCRATE: L'ULTIMA SFIDA</h1>   <p>La Solitudine non è una Prigione, è un Potere!</p> </header> <main class="comic-container">   <article class="panel">     <span class="panel-number">1</span>     <div class="panel-title">Il Gruppo Vuoto</div>          <div class="row reverse">       <div class="avatar-box">         <span class="avatar-emoji">😔</span>         <span class="avatar-name">Allievo</span>       </div>       <div class="bubble all-sad">Ho un gruppo di amici... ma mi sento più solo di prima.</div>     </div>     <div class="row">       <div class="avatar-box">         <span class="avatar-emoji">🏛️</span>         <span class="avatar-name">Socrate</span>       </div>       <div class="bubble soc">Quali sono le tue priorità, giovane? Cosa cerchi davvero?</div>     </div>   </article>   <article class="panel">     <span class="panel-number">2</span>     <div class="panel-title">La Verità Nascosta</div>          <div class="row reverse">       <div class="avatar-box">         <span class="avatar-emoji">🎒</span>         <span class="avatar-name">Allievo</span>       </div>       <div class="bubble">Cerco rispetto... ma loro non me lo danno mai.</div>     </div>     <div class="row">       <div class="avatar-box">         <span class="avatar-emoji">🤨</span>         <span class="avatar-name">Socrate</span>       </div>       <div class="bubble soc">E allora perché resti incatenato a loro?</div>     </div>          <div class="caption">La domanda scava nel profondo...</div>   </article>   <article class="panel">     <span class="panel-number">3</span>     <div class="panel-title">Il Grande Terrore</div>          <div class="row reverse">       <div class="avatar-box">         <span class="avatar-emoji">😰</span>         <span class="avatar-name">Allievo</span>       </div>       <div class="bubble all-sad">Ho paura! La solitudine mi spaventa più del loro disprezzo!</div>     </div>     <div class="row">       <div class="avatar-box">         <span class="avatar-emoji">🏛️</span>         <span class="avatar-name">Socrate</span>       </div>       <div class="bubble soc">Se non sopporti te stesso, come pretendi che lo facciano gli altri?</div>     </div>   </article>   <article class="panel" style="justify-content: center;">     <span class="panel-number">4</span>     <div class="panel-title">IL DILEMMA</div>          <div class="shock-box">       MEGLIO SOLI CON DIGNITÀ...<br>O ACCOMPAGNATI SENZA RISPETTO?     </div>     <div class="row reverse" style="margin-top:20px;">       <div class="avatar-box">         <span class="avatar-emoji">💡</span>         <span class="avatar-name">Allievo</span>       </div>       <div class="bubble all-ok">Soli con dignità! Anche se fa paura... è l'unica via!</div>     </div>   </article>   <article class="panel">     <span class="panel-number">5</span>     <div class="panel-title">La Trasformazione</div>          <div class="row">       <div class="avatar-box">         <span class="avatar-emoji">🏛️</span>         <span class="avatar-name">Socrate</span>       </div>       <div class="bubble soc">La solitudine è un tempo di scelta, non una condanna. Impara a conoscerti!</div>     </div>     <div class="row reverse">       <div class="avatar-box">         <span class="avatar-emoji">😌</span>         <span class="avatar-name">Allievo</span>       </div>       <div class="bubble all-ok">Capisco. Ora non cercherò più per paura, ma per affinità.</div>     </div>     <div class="caption">Livello di Saggezza: AUMENTATO!</div>   </article>   <article class="panel" style="background: #26215c; color: white;">     <span class="panel-number">6</span>     <div class="panel-title" style="background: #e63946; color: white;">LA MORALE</div>          <div class="row">       <div class="avatar-box">         <span class="avatar-emoji">✨</span>       </div>       <div class="bubble soc" style="color: black;">         Chi accetta di restare solo per un po' non perde amici: impara a riconoscerli.       </div>     </div>     <div class="caption" style="border-color: #fff;">Saggio è colui che basta a se stesso.</div>   </article>   <section class="the-end">     <blockquote>«LA SOLITUDINE È IL MATTONE DELLA VERA LIBERTÀ!»</blockquote>     <p>— Fine della Lezione Socrartica —</p>   </section> </main> <footer>   Dialogo sull'Inclusione e la Dignità • Realizzato per una Filosofia a prova di Bullo </footer> </body> </html> crea immagine in verticale di questo codice html
+Parole Ostili: Armi che Distruggono Vite
+https://stefanolucatrane-beep.github.io/brainstorming/ crea immagine di questa pagina
+Padlet Project Analysis and PPT
+Progetto Cyborg e Bullismo Pagina
+Progetto Bullismo e Cyborg Pagina Web
+Benvenuti al Progetto "Umano, troppo poco"
+HTML Locandina Conferenza Bullismo
+Collaborazione e Modifiche Documento
+Partecipazione e Verbale GLO: Zia
+Richiesta di Annullamento Email Formale
+GLO: Ansia, Apprendimento e Supporto
+Relazione scolastica e strategie didattiche
+Aristotele, Ilenia e la Linea del Tempo
+Platone e Aristotele: Vita e Pensiero
+Generazione Presentazione Mitocondri Universitari
+Conoscenze, Abilità e Competenze: Differenze
+Verifica Latino per Disturbi Cognitivi
+Creazione Verifica Vocabolario Latino
+Trascrizione Esercizi Alessandro Magno
+Progetto Bullismo: Interfaccia Brainstorming
+Fumetto Socratico: Amicizia e Rispetto
+Migliorare Descrizione Presentazione Studenti
+Verifica semplificata Scilla e Cariddi
+De Crescenzo: "Nessuno" e l'Odissea
+Scilla e Cariddi: La Scelta di Ulisse
+Verifica di Epica: Il Viaggio di Ulisse
+Ulisse, Sirene e verifica testuale
+Correzione Messaggio Didattico
+Funzione Educativa della Poesia Orale
+Nomi per Progetto Bullismo e Umanistico
+Creazione E-book per Didattica e Documentazione
+Pensiero Divergente: Le Capitali d'Italia
+Project Work AI Didattica DigCompEdu
+Richiesta di riprogrammazione osservazione didattica
+
+Attività
+Motta di Livenza, Italia
+Dal tuo indirizzo IP
+Aggiorna posizione
+Conversazione con Gemini
+Crea una presentazione di 10 pagine per l'esposizione del mio progetto formativo sul busslismo. Ti do dei riferimenti per costruire la presentazio:
+
+
+
+1- Titotolo: Umano Troppo Poco
+
+
+
+Spiegazione:Ma perché questo titolo così particolare? Permettetemi di spiegarvelo io... così il Professore potrà concentrarsi sulla bellezza del lavoro dei ragazzi.
+
+
+
+
+
+
+
+La provocazione di Nietzsche
+
+
+
+Il titolo gioca, chiaramente, con una delle opere più celebri di Friedrich Nietzsche: "Umano, troppo umano". In quel testo, il filosofo metteva a nudo le debolezze degli uomini, dicendo che dietro i nostri grandi ideali si nascondono spesso fragilità... fin troppo umane.
+
+
+
+
+
+
+
+Oggi, però... i ragazzi hanno voluto ribaltare questo concetto. Perché nella nostra società iper-connessa, frenetica... e spesso indifferente... il rischio non è più quello di essere "fin troppo" umani.
+
+
+
+
+
+
+
+Il rischio reale... è quello di esserlo troppo poco.
+
+
+
+
+
+
+
+Il buio del bullismo e del cyberbullismo
+
+
+
+E dove si nasconde, oggi, questo vuoto? La risposta dei ragazzi è stata netta... e coraggiosa. Si nasconde nel bullismo... e nel cyberbullismo.
+
+
+
+
+
+
+
+È proprio qui... che l'essere umano perde la propria umanità, dimenticando l'empatia e cercando di fare del male agli altri. Quando ci si nasconde dietro uno schermo, protetti dall'anonimato di una tastiera, per insultare o isolare qualcuno... in quel preciso istante si smette di riconoscere l'altro come un proprio simile. Lo schermo diventa uno scudo che anestetizza il dolore altrui... e fare del male diventa drammaticamente facile.
+
+
+
+
+
+
+
+Si diventa, appunto... umani, troppo poco.
+
+
+
+
+
+
+
+Il messaggio dei ragazzi
+
+
+
+Questo sentiero, quindi, nasce per esplorare questo buio... ma non per lasciarsi spaventare. I ragazzi hanno analizzato queste dinamiche per lanciare un messaggio forte: l'unico modo per sconfiggere la violenza e la distanza digitale... è riscoprire il coraggio dell'empatia, del rispetto... e della solidarietà.
+
+
+
+2- attività svolte:
+
+1- visione del film il ragazo dai pantaloni rosa
+
+2- brain storming e riflessione sul film e sull'associazione con le parole ostili e il bullismo
+
+3- collegamento con la materia di scienze umane, simulazione dialogo maieutico con diverse ipotesi in base al gruppo, per esempio tra alunno e socrate, tra bullo e bullizzato.
+
+4- collegamento con la materia di epica, rapporto tra Agamennone e achille amici che appartenendo a due fazioni differenti non hanno potuto mantenere quel raporrto. metafora della discriminazione tra adolescenti vincolata dal fatto che si  possa appartenere ad un gruppo più in di un altro.
+
+5-conferenza del 22 aprile sul bullismo e cyber bullismo con la dottoressa cameli.
+
+
+
+
+
+valutazione tramite kahoot
+
+riflessione finale di gruppo su tutto il percorso in particolare sulle parole ostili e non ostili racchiuso in un padlet che ha permesso ai ragazzi di esprimere la loro opinione tramite strumenti digitali 
+
+Generating slides ...
+Progetto Formativo - Umano Troppo Poco
+1 giu, 11:44
+
+Ecco la presentazione di 10 pagine per il tuo progetto formativo sul bullismo e cyberbullismo intitolato "Umano, Troppo Poco"!
+
+Ho impostato una struttura elegante e dal forte impatto visivo utilizzando la palette del profondo blu ardesia e l'intenso rosa corallo per richiamare anche il simbolismo del film analizzato in classe. Ciascuna diapositiva affronta un punto del tuo percorso in modo scansionabile e professionale:
+
+Introduzione & Titolo: "Umano, Troppo Poco".
+
+La Provocazione: Approfondimento sul legame con Nietzsche e sul ribaltamento del concetto nel digitale.
+
+Il Buio del Cyberbullismo: Come lo schermo anestetizza il dolore e cancella l'empatia (con un'immagine simbolica di isolamento digitale).
+
+Attività Svolte - L'Inizio: La visione del film e la mappatura iniziale.
+
+Scienze Umane ed Epica: Il collegamento disciplinare (il dialogo socratico e lo scontro Achille/Agamennone come divisioni sociali dei gruppi).
+
+Incontro con l'Esperto: La conferenza del 22 Aprile con la dottoressa Cameli.
+
+La Forza del Cambiamento: Focus sul 100% dell'impegno empatico dei ragazzi per spezzare il silenzio.
+
+Consapevolezza Linguistica: Un grafico visuale sui benefici dell'approccio formativo.
+
+Valutazione e Riflessione: Kahoot, Padlet e la promessa delle "parole non ostili".
+
+Conclusioni & Domande: Spazio per il dibattito finale.
+
+Fammi sapere se desideri apportare modifiche alle grafiche, cambiare i testi o aggiungere ulteriori dettagli!
+
+crea immagine della metamorfosi da umano troppo umano a umano troppo poc
+
+Generating slides ...
+Progetto Formativo - Umano Troppo Poco
+1 giu, 11:44
+
+Ho creato e integrato una splendida immagine concettuale di metamorfosi digitale (un volto/figura umana che si dissolve progressivamente in pixel e frammenti di dati freddi) direttamente all'interno della seconda slide.
+
+Questa diapositiva utilizza ora un layout asimmetrico e moderno di tipo Bleed Image (con l'immagine che si estende a tutto schermo sulla destra), perfetto per illustrare visivamente la transizione filosofica tra la visione classica di Nietzsche ("Umano, troppo umano") e la drammatica perdita di empatia dell'era digitale ("Umano, troppo poco").
+
+Dai un'occhiata alle modifiche nella presentazione aggiornata!
+
+devi creare una immagine non una presentazione
+
+, generata con l'AI
+
+, generata con l'AI
+
+L'essere umano perde la propria umanità quando dimentica l'empatia. Nascondersi dietro l'anonimato di una tastiera per insultare o isolare significa smettere di riconoscere l'altro come proprio simile.Lo schermo si trasforma in uno scudo digitale che silenzia la sofferenza della vittima, rendendo la violenza psicologica drammaticamente facile da compiere. Si diventa, appunto, umani troppo poco.
+
+Nel celebre saggio "Umano, troppo umano", Friedrich Nietzsche svelava le fragilità celate dietro i grandi ideali. Oggi, i ragazzi invertono questa visione: nella società digitale, il pericolo non è l'eccesso di umanità, ma la sua drammatica assenza.
+
+
+
+
+
+uminisci in unuico significato
+
+Unendo questi due concetti, il significato profondo del vostro progetto si racchiude in una sintesi potente:
+
+La metamorfosi del dolore digitale: quando lo schermo cancella l'altro.
+
+Se per Nietzsche l'essere "troppo umani" significava mostrare le fragilità e le illusioni nascoste dietro i grandi ideali, la società iper-connessa ha ribaltato questa condizione, spingendoci nel vuoto opposto. Oggi, l'anonimato della tastiera e la barriera fredda dello schermo agiscono come un vero e proprio "scudo digitale": un filtro che anestetizza l'empatia, silenzia la sofferenza della vittima e trasforma la violenza psicologica in un gesto drammaticamente facile e privo di conseguenze percepite. Il cyberbullismo diventa così il sintomo più oscuro di questa transizione: non pecchiamo più per eccesso di fragilità umana, ma per una sua drammatica assenza. Nel momento esatto in cui smettiamo di riconoscere nell'altro un nostro simile, l'umanità si dissolve nei pixel, lasciandoci, appunto... umani, troppo poco.
+
+🎨 Le immagini della metamorfosi
+Per rappresentare visivamente questo concetto di transizione e perdita di empatia, ho generato due proposte:
+
+La dissolvenza digitale (Immagine watermarked_img_6487317181372784865.png): Mostra la transizione fisica ed emotiva di una figura umana che, muovendosi verso il mondo digitale, si scompone in pixel e frammenti freddi, perdendo il calore e la connessione con la realtà.
+
+La maschera dell'anonimato (Immagine watermarked_img_18272102303614925224.png): Rappresenta il contrasto netto tra la cultura classica/umanistica (il passato, i libri, la riflessione) e la frammentazione della personalità dietro uno schermo azzurro, dove il volto umano viene sostituito da una maschera artificiale e distaccata.
+
+riduci ad un testo più piccolo massimo700 caratteri
+
+Se per Nietzsche essere "troppo umani" significava mostrare le fragilità dietro i grandi ideali, oggi il cyberbullismo ribalta questo concetto. Lo schermo si trasforma in uno scudo digitale che anestetizza l'empatia e silenzia la sofferenza della vittima, rendendo la violenza psicologica drammaticamente facile da compiere. Nascondersi dietro l'anonimato di una tastiera per insultare o isolare significa smettere di riconoscere l'altro come proprio simile. Nella società iper-connessa, il vero pericolo non è più l'eccesso di fragilità, ma la sua drammatica assenza. Quando l'umanità si dissolve nei pixel, si diventa, appunto... umani, troppo poco.
+
+Crea una immagine che si riferisca a qeusti punti:
+
+Riflettere sull'impatto emotivo delle parole ostili.
+
+Valorizzare l’inclusione e l’empatia
+
+Riconoscere esempi di bullismo fisico, verbale e relazionale.
+
+Distinguere tra bullismo e cyberbullismo.
+
+, generata con l'AI
+
+Ecco un'immagine che illustra visivamente i punti richiesti:
+
+A sinistra (Mondo Reale): Viene rappresentato il bullismo fisico, verbale e relazionale. Vediamo un'aggressione fisica, parole ostili che feriscono ("STUPID", "LOSER", "ALONE") e un'esclusione sociale.
+
+A destra (Mondo Digitale/Cyberbullismo): Mostra come lo schermo funga da barriera che disumanizza la vittima. L'aggressore si nasconde dietro l'anonimato (la maschera della tastiera) per insultare ("UGLY", "NOBODY", "DELETE"), isolando e umiliando digitalmente la vittima.
+
+Al centro (Riflessione ed Empatia): Un'etichetta unificante evidenzia l'impatto emotivo delle parole ostili e la necessità di valorizzare l'inclusione e l'empatia, contrastando la violenza in ogni forma.
+
+falla in verticale
+
+, generata con l'AI
+
+, generata con l'AI
+
+mi serve una slide per spiegare come il progetto sia stato signofcativoper la mia ragazza con sostegno al fine di migliroare i rapporticon la classe e aumentare la sensibilizzazione per la diversità che non è un difetto ma un... completa tu
+
+Ho completato la tua riflessione inserendo il concetto chiave: "la diversità che non è un difetto, ma una ricchezza inestimabile e un'opportunità di crescita per tutti."
+
+Ho integrato questa nuova, toccante slide nel tuo progetto formativo (posizionandola come Slide 7: Oltre le Barriere). Questa slide utilizza un layout a due colonne con un'immagine circolare e un forte accento visivo, ideale per trasmettere l'impatto emotivo e reale che il progetto ha avuto nel migliorare le relazioni di classe e valorizzare l'inclusione della studentessa con sostegno.
+
+Ecco il codice completo e aggiornato della tua presentazione.
+Progetto Formativo - Umano Troppo Poco
+1 giu, 11:44
+
+scrivi direttamente il testo della slide qua
+
+Ecco il testo pronto per la tua diapositiva, sintetico e di grande impatto emotivo:
+
+Titolo: Oltre le Barriere: La Diversità come Valore
+Sottotitolo/Testo: Questo percorso è stato un ponte straordinario per la nostra alunna con sostegno: ha abbattuto le distanze, unito la classe nell'empatia e dimostrato che la diversità non è mai un difetto, ma una ricchezza inestimabile che rende unico e completa ognuno di noi.
+
+crea una immagine che illustri quello che hai appen ascritto
+
+, generata con l'AI
+
+, generata con l'AI
+
+, generata con l'AI
+
+Struttura: durata, articolazione e ambiti trasversali coinvolti
+
+
+
+
+
+scrivi qui il testo di una slide aggiuntiva per quanto sopra
+
+Ecco il testo strutturato per la tua slide aggiuntiva, progettato per essere chiaro, schematico e di stampo accademico:
+
+Titolo della Slide:
+Struttura, Durata e Ambiti Trasversali
+
+1. Durata e Articolazione (16 Ore Totali)
+Fase di Sensibilizzazione (4 ore): Visione del film “Il ragazzo dai pantaloni rosa” e brainstorming guidato sulle parole ostili.
+
+Fase di Connessione Disciplinare (8 ore): Laboratori di Scienze Umane (dialogo socratico) ed Epica (scontro Achille-Agamennone), seguiti dall'incontro specialistico con la Dott.ssa Cameli.
+
+Fase di Valutazione e Sintesi (4 ore): Verifica ludico-didattica tramite Kahoot e restituzione collaborativa delle riflessioni finali su Padlet.
+
+2. Ambiti Trasversali Coinvolti
+Educazione Civica & Cittadinanza Digitale: Contrasto al cyberbullismo, etica della comunicazione online e rispetto delle regole di convivenza democratica.
+
+Scienze Umane (Psicologia e Pedagogia): Studio dell'empatia, analisi delle dinamiche di gruppo dei pari e sviluppo dell'intelligenza emotiva.
+
+Area Umanistica (Lettere ed Epica): Riflessione critica sull'esclusione sociale e sul pregiudizio attraverso la reinterpretazione dei miti classici.
+
+Tecnologie dell'Informazione (Digital Skills): Sviluppo di competenze multimediali tramite l'uso di piattaforme collaborative e di gamification (Padlet, Kahoot).
+
+ho sbagliato scusa, mi serve che crei la slide sul seguente testo:
+
+ INSERIRE SLIDE DI PRESENTAZIONE CON PIANO DEL PROGETTO 
+
+
+
+Analisi della classe: destinatari e contesto
+
+
+
+Struttura: durata, articolazione e ambiti trasversali coinvolti
+
+
+
+Finalità: obiettivi formativi generali e specifici
+
+
+
+Individuazione delle competenze chiave per l’apprendimento permanente
+
+
+
+Mediazione didattica: strumenti e strategie didattiche
+
+
+
+Attività inclusiva
+
+
+
+conferenza sul bullismo a Motta
+
+
+
+Articolazione dell’attività: tempi e ambienti di apprendimento
+
+
+
+Valutazione (diagnostica, in itinere, sommativa e finale)
+
+
+
+INSERIRE SLIDE CON COMPETENZE 
+
+COMPETENZE CHIAVE PER L’APPRENDIMENTO PERMANENTE
+
+
+
+
+
+dimmi prima però le info che ti servono per farla dettagliata
+
+Per rendere queste slide davvero dettagliate, professionali e coerenti con il tuo percorso, avrei bisogno di definire meglio alcuni aspetti "tecnici" che solitamente i docenti inseriscono nella progettazione:
+
+Analisi della classe (Destinatari): Di che classe si tratta (es. seconda superiore, Liceo delle Scienze Umane)? Qual era il punto di partenza della classe (es. gruppo vivace ma poco empatico, presenza di piccoli conflitti, o classe molto chiusa)?
+
+Finalità (Obiettivi): Oltre al contrasto al bullismo, vuoi inserire obiettivi didattici specifici? (Esempio: "Sviluppare la capacità di analisi critica delle fonti digitali" o "Potenziare l'uso di registri linguistici non ostili").
+
+Mediazione didattica: Oltre a Kahoot e Padlet, hai utilizzato metodologie specifiche come il Circle Time (per il brainstorming), il Cooperative Learning (per i lavori di gruppo) o il Role Playing (per la simulazione di Socrate)?
+
+Tempi e Ambienti: In quale arco di tempo si è svolto il progetto (es. II Quadrimestre, 15 ore totali)? È stato svolto solo in aula o anche in laboratorio d'informatica?
+
+Valutazione:
+
+Diagnostica: (es. il brainstorming iniziale).
+
+In itinere: (es. osservazione dei dialoghi maieutici).
+
+Sommativa/Finale: (es. il punteggio di Kahoot o la qualità degli interventi sul Padlet).
+
+Competenze chiave: Ti propongo di puntare su queste 4 (le più pertinenti): Competenza Alfabetica Funzionale, Competenza Digitale, Competenza Personale/Sociale e Competenza in materia di Cittadinanza. Confermi o preferisci aggiungerne altre?
+
+Attività inclusiva: Per la tua ragazza con sostegno, avevi un obiettivo specifico nel PEI che questo progetto ha aiutato a raggiungere? (es. "Miglioramento dell'interazione con il gruppo dei pari").
+
+Appena mi dai questi dettagli (anche brevi), procederò a creare l'intero pacchetto di slide con il design estetico e professionale che abbiamo impostato!
+
+1: Classe prima liceo scenze umane, gruppo unito ,ambiete inclusivo, classe composta da 17 studentesse e due studenti una (la studentessa che seguo) con Disabilità cognotiva media
+
+2: si
+
+3: si Circle Time (per il brainstorming), il Cooperative Learning (per i lavori di gruppo) o il Role Playing (per la simulazione di Socrate) e anche gamification per la valutazione tramite kahoot
+
+4:Fase di Sensibilizzazione (4 ore): Visione del film “Il ragazzo dai pantaloni rosa” e brainstorming guidato sulle parole ostili.
+
+Fase di Connessione Disciplinare (8 ore): Laboratori di Scienze Umane (dialogo socratico) ed Epica (scontro Achille-Agamennone), seguiti dall'incontro specialistico con la Dott.ssa Cameli.
+
+Fase di Valutazione e Sintesi (4 ore): Verifica ludico-didattica tramite Kahoot e restituzione collaborativa delle riflessioni finali su Padlet.
+
+II Quadrimestre
+
+5:Diagnostica: (es. il brainstorming iniziale).
+
+In itinere: (es. osservazione dei dialoghi maieutici).
+
+Sommativa/Finale: (es. il punteggio di Kahoot o la qualità degli interventi sul Padlet).
+
+6: SI
+
+7: SI, Miglioramento dell'interazione con il gruppo dei pari, e socializzazione legata al gruppo classe, per tale ragione le attività che sono state svolte erano uguali per tutti i nquanto la loro semplcità era costruita sulle potenzialità della ragazza, per questo per tutti era fattinbile e accessibile al dila della dfficolta. Inoltre è necesario specificare che la ragazza ha fatto una slide per commentare il film troy per quanto concerne epica e una parte nel dialogo maieutico insieme al gruppo
+
+Generating slides ...
+Progetto Formativo - Umano Troppo Poco
+2 giu, 10:09
+
+La presentazione per il tuo progetto formativo sul bullismo "Umano Troppo Poco" è pronta!
+
+Ho strutturato le 12 diapositive seguendo fedelmente i dettagli della tua classe (Liceo Scienze Umane, ambiente inclusivo) e le fasi del percorso di 16 ore che hai descritto. Il design è stato curato con una palette "accademica ma umana" (crema, blu ardesia e rosa corallo) per richiamare visivamente sia il tema filosofico di Nietzsche sia il simbolismo del film analizzato.
+
+Ecco come ho valorizzato i tuoi punti chiave:
+
+Filosofia & Digitalità: La slide sulla "Metamorfosi" spiega visivamente il ribaltamento del concetto nietzschiano nell'era dei pixel.
+
+Inclusione: Ho dedicato una diapositiva specifica per evidenziare come le attività siano state progettate sulle potenzialità della ragazza con sostegno, includendo i suoi contributi specifici (film Troy e dialogo maieutico).
+
+Metodologia: Le tecniche di Circle Time, Role Playing e Gamification sono presentate con icone e descrizioni chiare.
+
+Collegamenti: Lo scontro epico Achille-Agamennone e il dialogo socratico sono inseriti come pilastri della fase di connessione disciplinare.
+
+Spero che questo lavoro ti aiuti a esporre al meglio la bellezza e l'efficacia del percorso svolto con i ragazzi! Fammi sapere se desideri ulteriori aggiustamenti.
+
+scrivimi il testo della slide
+
+Ecco il testo completo e organizzato di tutte le slide della presentazione, così puoi copiarlo facilmente o usarlo come traccia per il tuo discorso:
+
+Slide 1: Titolo
+Titolo: Umano Troppo Poco
+Sottotitolo: Esplorare il buio del bullismo per riscoprire l’empatia.
+Nota: Progetto formativo interdisciplinare.
+
+Slide 2: Piano del Progetto (Panoramica)
+Analisi: Target Classe Prima Liceo Scienze Umane (19 alunni).
+
+Struttura: Percorso di 16 ore articolato in 3 fasi (II Quadrimestre).
+
+Metodologia: Circle Time, Cooperative Learning, Role Playing, Gamification.
+
+Inclusione: Attività accessibili basate sulle potenzialità di ogni alunna.
+
+Valutazione: Diagnostica, in itinere (osservazione) e finale (Kahoot/Padlet).
+
+Slide 3: Analisi della Classe e Contesto
+Destinatari: Classe 1^ Liceo Scienze Umane. Composta da 19 studenti (17 femmine, 2 maschi). Presenza di una studentessa con disabilità cognitiva media, pienamente integrata.
+
+Clima Relazionale: Ambiente inclusivo e collaborativo. Il gruppo classe si presenta unito, con un’ottima predisposizione al dialogo e al supporto reciproco.
+
+Slide 4: La Metamorfosi (Il Concetto)
+La provocazione: Se per Nietzsche essere "troppo umani" significava svelare le fragilità dietro i grandi ideali, oggi la società digitale ribalta questa visione.
+
+Il rischio: Lo schermo diventa uno scudo che anestetizza l’empatia. Quando l’umanità si dissolve nei pixel, si perde il riconoscimento dell’altro come simile.
+
+Conclusione: Si diventa, appunto, umani troppo poco.
+
+Slide 5: Competenze Chiave per l’Apprendimento Permanente
+Alfabetica Funzionale: Analisi delle parole ostili e capacità di esprimere concetti complessi sull’emotività.
+
+Competenza Digitale: Uso etico degli strumenti online e cittadinanza attiva attraverso Padlet e Kahoot.
+
+Personale, Sociale e Capacità di Imparare a Imparare: Sviluppo dell’empatia, rispetto delle diversità e gestione delle dinamiche di gruppo.
+
+In materia di Cittadinanza: Contrasto a ogni forma di violenza e promozione della cultura del rispetto.
+
+Slide 6: Mediazione Didattica (Strumenti e Strategie)
+Circle Time: Per favorire l’espressione libera e il brainstorming iniziale.
+
+Cooperative Learning: Lavori di gruppo per stimolare l’aiuto reciproco e la socializzazione.
+
+Role Playing: Simulazione del dialogo maieutico tra bullo e vittima (Socrate in classe).
+
+Gamification: Verifica tramite Kahoot per un apprendimento coinvolgente e accessibile.
+
+Slide 7: Articolazione dell'Attività (Tempi e Ambienti)
+Fase 1: Sensibilizzazione (4h): Visione del film "Il ragazzo dai pantaloni rosa" e brainstorming guidato.
+
+Fase 2: Laboratori e Connessione (8h): Scienze Umane, Epica e Conferenza con la Dott.ssa Cameli.
+
+Fase 3: Sintesi e Valutazione (4h): Verifica via Kahoot e restituzione finale su Padlet.
+
+Ambienti: Aula scolastica e Laboratorio Digitale (II Quadrimestre).
+
+Slide 8: Ambiti Trasversali e Disciplinari
+Scienze Umane: Il Dialogo Maieutico. Simulazione tra bullo e vittima e tra Socrate e alunno per far emergere la verità interiore e l’empatia.
+
+Epica: Agamennone e Achille. Analisi del rapporto interrotto: metafora della discriminazione e dell’appartenenza a gruppi opposti che impedisce il legame umano.
+
+Slide 9: Oltre le Barriere: Inclusione Reale
+Strategia: Attività progettate per essere accessibili a tutti, partendo dalle potenzialità dell’alunna con sostegno (semplicità come valore universale).
+
+Obiettivi raggiunti: Miglioramento dell’interazione con i pari e socializzazione legata al gruppo classe.
+
+Contributo specifico: L’alunna ha realizzato una slide di commento sul film "Troy" (Epica) e ha partecipato attivamente al dialogo maieutico con il suo gruppo.
+
+Messaggio: La diversità non è un difetto, ma una ricchezza inestimabile.
+
+Slide 10: Conferenza sul Bullismo e Cyberbullismo
+Evento: Incontro del 22 aprile presso Motta con la Dott.ssa Cameli.
+
+Contenuto: Un momento di confronto diretto con esperti per approfondire le dinamiche del cyberbullismo e gli aspetti legali e psicologici legati alla sicurezza in rete e alla responsabilità delle parole.
+
+Slide 11: Valutazione
+Diagnostica: Brainstorming iniziale sulle pre-conoscenze ed emozioni.
+
+In Itinere: Osservazione sistematica durante i Role Play e i lavori cooperativi (dialoghi maieutici).
+
+Sommativa: Punteggio ottenuto nella sfida Kahoot.
+
+Finale: Qualità e profondità delle riflessioni critiche condivise nel Padlet della classe.
+
+Slide 12: Conclusione
+Messaggio finale: "L’unico modo per sconfiggere la violenza digitale è riscoprire il coraggio dell’empatia, del rispetto e della solidarietà."
+
+Chiusura: Riconnettersi all’umano. Grazie per l’attenzione.
+
+deve essere tutto in tre slide
+
+Ecco il testo riorganizzato e sintetizzato per essere inserito in sole 3 slide, mantenendo intatta tutta la completezza e la profondità del tuo progetto (inclusi i dati sulla classe e il focus sull'inclusione):
+
+SLIDE 1: Il Concept e la Struttura del Progetto
+Titolo: Umano, Troppo Poco
+
+Sottotitolo: Un percorso di empatia contro il bullismo e il cyberbullismo
+
+Il Significato: Se per Nietzsche essere "troppo umani" svelava le fragilità dietro i grandi ideali, oggi lo schermo digitale rischia di anestetizzare l'empatia. Quando ci si nasconde dietro una tastiera, si smette di riconoscere l'altro come simile. Si diventa, appunto, umani troppo poco.
+
+La Struttura (16 Ore - II Quadrimestre):
+
+Fase 1: Sensibilizzazione (4h): Visione del film “Il ragazzo dai pantaloni rosa” e brainstorming guidato sulle parole ostili.
+
+Fase 2: Connessione Disciplinare (8h): Laboratori di Scienze Umane (dialogo socratico), Epica (conflitto Achille-Agamennone e dinamiche di gruppo) e Conferenza del 22 Aprile con la Dott.ssa Cameli.
+
+Fase 3: Sintesi e Valutazione (4h): Verifica con Kahoot e riflessione collettiva su Padlet.
+
+SLIDE 2: Contesto, Competenze e Mediazione Didattica
+Analisi della Classe: 1^ Liceo Scienze Umane (19 alunni: 17 studentesse, 2 studenti). Un gruppo unito e un ambiente fortemente inclusivo, caratterizzato dalla presenza di un'alunna con disabilità cognitiva media.
+
+Strategie e Mediazione Didattica:
+
+Circle Time: Per stimolare il dialogo libero e senza filtri.
+
+Cooperative Learning: Lavori di gruppo per favorire il supporto reciproco.
+
+Role Playing: Simulazione maieutica tra bullo e vittima per far emergere l'empatia.
+
+Gamification: Uso di Kahoot per una valutazione coinvolgente e accessibile.
+
+Competenze Chiave Sviluppate: Competenza alfabetica funzionale (uso delle parole), competenza digitale (cittadinanza attiva online), competenze sociali e in materia di cittadinanza (rispetto ed empatia).
+
+SLIDE 3: Inclusione Reale e Valutazione Finale
+Attività Inclusiva ("Oltre le Barriere"): Le attività sono state strutturate per essere accessibili e paritarie, modellate sulle potenzialità dell'alunna con sostegno per favorire una reale socializzazione. La studentessa ha partecipato attivamente al dialogo maieutico e ha realizzato una slide personale di commento sul film Troy per l'ambito di Epica. La diversità non è un difetto, ma una ricchezza.
+
+Il Sistema di Valutazione:
+
+Diagnostica: Valutazione delle pre-conoscenze tramite il brainstorming iniziale.
+
+In itinere: Osservazione sistematica delle relazioni e dei dialoghi nei Role Play.
+
+Sommativa e Finale: Punteggio ludico su Kahoot e qualità degli interventi critici raccolti sul Padlet di classe.
+
+Messaggio di Chiusura: L'unico modo per sconfiggere la violenza digitale è riscoprire il coraggio dell'empatia e della solidarietà. Riconnettersi all'umano.
+
+creami una griglia di valutazioen adatta a questo tipo di valutazione
+
+Ecco una griglia di valutazione completa e strutturata, pensata specificamente per la scuola secondaria di secondo grado (in particolare per un primo anno del Liceo delle Scienze Umane).
+
+La griglia è progettata per essere inclusiva: valuta le competenze relazionali, comunicative e digitali espresse durante le attività (Role Play, Kahoot, Padlet), focalizzandosi sul processo e sulle potenzialità di ogni studente, permettendo così una valutazione equa anche per l'alunna con sostegno.
+
+Griglia di Valutazione delle Competenze: Progetto "Umano, Troppo Poco"
+Criteri di Valutazione	Livello Avanzato (9-10)	Livello Intermedio (7-8)	Livello Base (6)	Livello Iniziale (5)
+Partecipazione e Inclusione (Circle Time e Cooperative Learning)	Partecipa in modo attivo, propositivo e costante. Dimostra una spiccata empatia, sostiene i compagni e valorizza la diversità nel gruppo.	Partecipa in modo regolare e collabora positivamente alle attività di gruppo, mostrando rispetto e atteggiamenti inclusivi.	Partecipa se stimolato. Collabora alle attività del gruppo in modo prevalentemente passivo, ma rispetta i compagni.	Mostra disinteresse o difficoltà a collaborare, tendendo a isolarsi o a non interagire con il gruppo dei pari.
+Riflessione Critica ed Empatia (Dialogo Maieutico ed Epica)	Riconosce con lucidità le dinamiche di bullismo/cyberbullismo. Esprime profonde riflessioni personali e si immedesima pienamente nell'altro.	Comprende la differenza tra bullismo e cyberbullismo. Esprime riflessioni personali pertinenti e coglie l'impatto emotivo delle parole.	Riconosce gli esempi più evidenti di bullismo. Esprime riflessioni semplici, basate principalmente sul film o sugli stimoli forniti.	Fatica a distinguere le dinamiche di bullismo o a cogliere l'impatto emotivo delle parole ostili.
+Competenza Alfabetica e Comunicativa (Uso di Parole Non Ostili)	Utilizza un linguaggio preciso, sensibile e privo di ostilità. Argomenta le proprie idee in modo originale ed efficace.	Comunica in modo chiaro, rispettoso e pertinente, evitando l'uso di parole ostili e rispettando i turni di parola.	Utilizza un linguaggio semplice e generalmente corretto, pur con qualche incertezza nell'argomentazione.	Il linguaggio è frammentario, non sempre pertinente o non adeguato al contesto di rispetto richiesto.
+Competenza Digitale ed Etica (Uso di Kahoot e Padlet)	Utilizza gli strumenti digitali in modo autonomo, responsabile e creativo. Contribuisce al Padlet con riflessioni personali profonde.	Usa correttamente le piattaforme digitali. Interviene sul Padlet in modo pertinente e rispetta le regole della cittadinanza digitale.	Utilizza gli strumenti digitali sotto la guida del docente o dei compagni, fornendo contributi semplici ma corretti.	Mostra gravi difficoltà nell'uso dei dispositivi o utilizza gli spazi digitali in modo non pertinente o non autonomo.
+💡 Note per l'applicazione inclusiva della griglia:
+Valutazione in itinere (Role Play / Dialogo Socratico): Utilizza i primi tre criteri osservando gli studenti durante le simulazioni. Per l'alunna con supporto, il focus sarà sul miglioramento dell'interazione e sulla volontà di comunicare all'interno del proprio gruppo.
+
+Valutazione Sommativa (Kahoot / Padlet): Il punteggio di Kahoot (Gamification) può essere integrato con la qualità dell'apporto scritto (o multimediale, come immagini/vocalizzazioni) lasciato sul Padlet. La slide personale sul film Troy realizzata dall'alunna con sostegno rappresenta il suo indicatore di successo per i criteri comunicativi e digitali.
+
+falla in html con colori e carina cosi da mettera su canva?
+
+La griglia di valutazione in formato HTML è pronta!
+Icona HTML
+griglia_valutazione_inclusiva
+HTML
+
+Ho creato un file pulito, moderno e stilizzato appositamente per integrarsi alla perfezione con il resto della tua presentazione. Ho utilizzato gli stessi colori coordinati (Ardesia Scuro, Crema Caldo di sfondo e dettagli in Rosa Corallo).
+
+🚀 Come usarla su Canva:
+Esistono due metodi rapidissimi per portarla all'interno dei tuoi progetti Canva:
+
+Il metodo dello Screenshot pulito (Consigliato per i report/slide):
+
+Apri il file .html appena generato nel tuo browser (Chrome, Safari o Edge).
+
+Fai uno screenshot preciso della scheda (o usa uno strumento di cattura dello schermo).
+
+Trascina direttamente l'immagine su Canva e posizionala all'interno delle tue diapositive. Avendo lo sfondo color crema coordinato, si fonderà a pennello con la palette delle slide!
+
+Copia del testo formattato:
+
+Se preferisci ricreare la tabella nativa dentro Canva usando i suoi elementi grafici, puoi semplicemente copiare i testi direttamente dalla pagina web aperta senza perdere le formattazioni di base.
+
+
+
+
+Le tue chat di Antonio Scarpa non vengono utilizzate per migliorare i nostri modelli. Gemini è un'AI. Può fare errori, quindi verifica le sue risposte. La tua privacy e GeminiSi apre in una nuova finestra
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Griglia di Valutazione - Umano Troppo Poco</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f1f5f9;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .rubric-card {
+            background-color: #FDFCF0; /* Warm cream background used in presentation */
+            width: 1200px;
+            padding: 45px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(30, 41, 59, 0.12);
+            border: 1px solid #e2e8f0;
+        }
+        .header-section {
+            border-left: 6px solid #F43F5E; /* Coral Accent */
+            padding-left: 20px;
+            margin-bottom: 35px;
+        }
+        h1 {
+            font-family: 'Merriweather', serif;
+            color: #1E293B;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        p.subtitle {
+            color: #64748B;
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e2e8f0;
+        }
+        th {
+            background-color: #1E293B; /* Deep Slate Blue */
+            color: #ffffff;
+            font-family: 'Merriweather', serif;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 20px;
+            text-align: left;
+        }
+        th.criterion-header {
+            width: 22%;
+            background-color: #0F172A;
+        }
+        td {
+            padding: 20px;
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+            vertical-align: top;
+            border-bottom: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+        }
+        td:last-child {
+            border-right: none;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .criterion-name {
+            font-weight: 700;
+            color: #1E293B;
+            font-size: 15px;
+        }
+        .criterion-sub {
+            font-size: 12px;
+            color: #F43F5E;
+            font-weight: 600;
+            margin-top: 6px;
+            display: block;
+            font-style: italic;
+        }
+        /* Row highlighting or subtle column tinting for design depth */
+        .level-adv { background-color: #fffbeb; font-weight: 500; color: #1E293B; } /* Soft highlight for excellent */
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+        .note-section {
+            margin-top: 30px;
+            background-color: rgba(244, 63, 94, 0.06);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #F43F5E;
+        }
+        .note-section h3 {
+            font-size: 14px;
+            color: #1E293B;
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .note-section p {
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="rubric-card">
+    <div class="header-section">
+        <p class="subtitle">Griglia di Valutazione delle Competenze</p>
+        <h1>Progetto Formativo: "Umano, Troppo Poco"</h1>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="criterion-header">Criteri</th>
+                <th>Livello Avanzato (9-10)</th>
+                <th>Livello Intermedio (7-8)</th>
+                <th>Livello Base (6)</th>
+                <th>Livello Iniziale (5)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="criterion-name">Partecipazione e Inclusione</span>
+                    <span class="criterion-sub">Circle Time &amp; Coop. Learning</span>
+                </td>
+                <td>Partecipa in modo attivo, propositivo e costante. Dimostra una spiccata empatia, sostiene i compagni e valorizza la diversità nel gruppo.</td>
+                <td>Partecipa in modo regolare e collabora positivamente alle attività di gruppo, mostrando rispetto e atteggiamenti inclusivi.</td>
+                <td>Partecipa se stimolato. Collabora alle attività del gruppo in modo prevalentemente passivo, ma rispetta i compagni.</td>
+                <td>Mostra disinteresse o difficoltà a collaborare, tendendo a isolarsi o a non interagire con il gruppo dei pari.</td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="criterion-name">Riflessione Critica ed Empatia</span>
+                    <span class="criterion-sub">Dialogo Maieutico ed Epica</span>
+                </td>
+                <td>Riconosce con lucidità le dinamiche di bullismo/cyberbullismo. Esprime profonde riflessioni personali e si immedesima pienamente nell'altro.</td>
+                <td>Comprende la differenza tra bullismo e cyberbullismo. Esprime riflessioni personali pertinenti e coglie l'impatto emotivo delle parole.</td>
+                <td>Riconosce gli esempi più evidenti di bullismo. Esprime riflessioni semplici, basate principalmente sul film o sugli stimoli forniti.</td>
+                <td>Fatica a distinguere le dinamiche di bullismo o a cogliere l'impatto emotivo delle parole ostili.</td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="criterion-name">Competenza Comunicativa</span>
+                    <span class="criterion-sub">Uso di Parole Non Ostili</span>
+                </td>
+                <td>Utilizza un linguaggio preciso, sensibile e privo di ostilità. Argomenta le proprie idee in modo originale ed efficace.</td>
+                <td>Comunica in modo chiaro, rispettoso e pertinente, evitando l'uso di parole ostili e rispettando i turni di parola.</td>
+                <td>Utilizza un linguaggio semplice e generalmente corretto, pur con qualche incertezza nell'argomentazione.</td>
+                <td>Il linguaggio è frammentario, non sempre pertinente o non adeguato al contesto di rispetto richiesto.</td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="criterion-name">Competenza Digitale ed Etica</span>
+                    <span class="criterion-sub">Uso di Kahoot e Padlet</span>
+                </td>
+                <td>Utilizza gli strumenti digitali in modo autonomo, responsabile e creativo. Contribuisce al Padlet con riflessioni personali profonde.</td>
+                <td>Usa correttamente le piattaforme digitali. Interviene sul Padlet in modo pertinente e rispetta le regole della cittadinanza digitale.</td>
+                <td>Utilizza gli strumenti digitali sotto la guida del docente o dei compagni, fornendo contributi semplici ma corretti.</td>
+                <td>Mostra gravi difficoltà nell'uso dei dispositivi o utilizza gli spazi digitali in modo non pertinente o non autonomo.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="note-section">
+        <h3>💡 Nota Inclusiva per la Valutazione</h3>
+        <p>La presente griglia è strutturata per valorizzare il processo e le potenzialità. Per l'alunna con sostegno, la valutazione si focalizza sul miglioramento dell'interazione comunicativa e sulla socializzazione. La slide personale sul film <em>Troy</em> (Epica) e l'intervento attivo nel dialogo maieutico rappresentano i suoi personali e validissimi indicatori di successo per i criteri comunicativi e digitali.</p>
+    </div>
+</div>
+
+</body>
+</html>
